@@ -9,7 +9,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 
-    fun test (long: Int): Int{
-        return long
+    fun test (long3: Int): Int{
+        return long3
     }
 }
