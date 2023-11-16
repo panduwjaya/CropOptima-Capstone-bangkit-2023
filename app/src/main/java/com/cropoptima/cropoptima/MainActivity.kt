@@ -9,6 +9,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 
+    #test commit 1
     fun test (long3: Int): Int {
         return long3
     }
