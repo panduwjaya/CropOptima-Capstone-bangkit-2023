@@ -1,7 +1,8 @@
-package com.cropoptima.cropoptima
+package com.cropoptima.cropoptima.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.cropoptima.cropoptima.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
