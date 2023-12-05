@@ -33,4 +33,9 @@
         nulla. Donec rhoncus libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus vestibulum. Fusce dictum
         libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+
+    <string-array name="bahasa">
+        <item>Indonesian</item>
+        <item>English</item>
+    </string-array>
 </resources>
