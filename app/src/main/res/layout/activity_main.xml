@@ -24,7 +24,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/nav_graph"/>
+        app:navGraph="@navigation/main_navigation"/>
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
