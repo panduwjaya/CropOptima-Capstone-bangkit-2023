@@ -37,7 +37,9 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
 }
+
 
 dependencies {
 
@@ -48,6 +50,7 @@ dependencies {
     implementation("com.google.android.gms:play-services-maps:18.2.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.6.0")
     implementation("androidx.navigation:navigation-ui-ktx:2.6.0")
+
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -59,4 +62,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1") //viewModelScope
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.1") //liveData
     implementation("androidx.activity:activity-ktx:1.4.0")
+
+    // splash screen
+    implementation("androidx.core:core-splashscreen:1.0.1")
 }

@@ -18,4 +18,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/auth_navigation" />
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_auth"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        tools:layout_editor_absoluteX="1dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

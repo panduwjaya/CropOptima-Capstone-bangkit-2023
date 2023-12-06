@@ -9,9 +9,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.cropoptima.cropoptima.R
 import com.cropoptima.cropoptima.databinding.ActivityMainBinding
-import com.cropoptima.cropoptima.main.detection.DetectionFragment
-import com.cropoptima.cropoptima.main.home.HomeFragment
-import com.cropoptima.cropoptima.main.profile.ProfileFragment
+
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class

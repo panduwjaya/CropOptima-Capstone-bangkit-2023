@@ -112,23 +112,23 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="120dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginTop="188dp"
-        android:text="Login"
         android:backgroundTint="#BEDB92"
+        android:text="Login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_input_password" />
 
     <TextView
-        android:id="@+id/tv_dont_have_account"
+        android:id="@+id/tv_i_have_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
         android:layout_marginTop="20dp"
         android:text="Don’t have an account?"
         android:textSize="16sp"
         android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_login" />
 
@@ -144,6 +144,6 @@
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/tv_dont_have_account"
+        app:layout_constraintStart_toEndOf="@+id/tv_i_have_account"
         app:layout_constraintTop_toBottomOf="@+id/btn_login" />
 </androidx.constraintlayout.widget.ConstraintLayout>

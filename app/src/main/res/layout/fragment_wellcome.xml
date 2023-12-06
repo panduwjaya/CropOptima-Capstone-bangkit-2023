@@ -8,23 +8,10 @@
     tools:context=".auth.wellcome.WellcomeFragment">
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="324dp"
-        android:layout_height="63dp"
-        android:layout_marginTop="388dp"
-        android:text="The smartest manage your money easily with Crop."
-        android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/tv_wellcome_first"
         android:layout_width="324dp"
         android:layout_height="63dp"
-        android:layout_marginTop="388dp"
+        android:layout_marginTop="300dp"
         android:text="The smartest manage your money easily with Crop."
         android:textAlignment="center"
         android:textSize="24sp"
@@ -37,20 +24,20 @@
         android:id="@+id/tv_wellcome_second"
         android:layout_width="324dp"
         android:layout_height="50dp"
-        android:layout_marginTop="16dp"
+        android:maxLines="2"
         android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent congue viverra libero. "
         android:textAlignment="center"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_wellcome_first" />
 
     <Button
         android:id="@+id/btn_create_account"
-        android:layout_marginTop="32dp"
         android:layout_width="266dp"
         android:layout_height="39dp"
+        android:layout_marginTop="30dp"
         android:backgroundTint="@color/seed"
         android:text="Create an Account >"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,7 +45,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_wellcome_second" />
 
     <TextView
-        android:id="@+id/tv_dont_have_account"
+        android:id="@+id/tv_i_have_account"
         android:layout_width="324dp"
         android:layout_marginTop="16dp"
         android:layout_height="50dp"
