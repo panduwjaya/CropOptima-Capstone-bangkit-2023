@@ -1,7 +1,10 @@
 package com.cropoptima.cropoptima.main.setting
 
+import android.app.LocaleManager
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
+import android.os.LocaleList
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -9,19 +12,16 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.CompoundButton
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.LocaleListCompat
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
-import com.cropoptima.cropoptima.R
 import com.cropoptima.cropoptima.databinding.FragmentSettingBinding
-import com.cropoptima.cropoptima.main.feature.dark.DarkModePreference
-import com.cropoptima.cropoptima.main.feature.dark.DarkModeViewModel
-import com.cropoptima.cropoptima.main.feature.dark.DarkModeViewModelFactory
-import com.google.android.material.navigation.NavigationBarView.OnItemSelectedListener
 
 class SettingFragment : Fragment() {
 
@@ -29,8 +29,8 @@ class SettingFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
-    private lateinit var pref: DarkModePreference
-    private lateinit var viewModel: DarkModeViewModel
+    private lateinit var pref: SettingsPreference
+    private lateinit var viewModel: SettingsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,9 +44,9 @@ class SettingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        pref = DarkModePreference.getInstance(requireContext().dataStore)
-        viewModel = ViewModelProvider(requireActivity(), DarkModeViewModelFactory(pref)).get(
-            DarkModeViewModel::class.java
+        pref = SettingsPreference.getInstance(requireContext().dataStore)
+        viewModel = ViewModelProvider(requireActivity(), SettingsViewModelFactory(pref)).get(
+            SettingsViewModel::class.java
         )
 
         binding.switchDarkMode.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
@@ -81,5 +81,41 @@ class SettingFragment : Fragment() {
             }
         }
 
+        binding.spinnerLang.apply {
+            onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    if(parent?.getItemAtPosition(position).toString() == language[1]) {
+                        setLocale("in", viewModel)
+                    } else {
+                        setLocale("en", viewModel)
+                    }
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                }
+            }
+            adapter = arrayAdapter
+        }
+
+    }
+
+
+    private fun setLocale(localeCode: String, viewModel: SettingsViewModel) {
+        viewModel.saveLocale(localeCode)
+        val context = requireContext()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            context.getSystemService(AppCompatActivity.LOCALE_SERVICE).let { localeManager ->
+                if (localeManager is LocaleManager) {
+                    localeManager.applicationLocales = LocaleList.forLanguageTags(localeCode)
+                }
+            }
+        } else {
+            AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(localeCode))
+        }
     }
 }
