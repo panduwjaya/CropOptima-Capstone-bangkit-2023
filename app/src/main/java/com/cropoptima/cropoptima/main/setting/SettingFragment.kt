@@ -69,7 +69,6 @@ class SettingFragment : Fragment() {
             }
         }
 
-        Log.i("info", selectedLangPos.toString())
 
         viewModel.getThemeSettings().observe(viewLifecycleOwner) { isDarkModeActive: Boolean ->
             if (isDarkModeActive) {
