@@ -68,7 +68,12 @@ dependencies {
     // splash screen
     implementation("androidx.core:core-splashscreen:1.0.1")
 
-    //glide
+    // glide
     implementation("com.github.bumptech.glide:glide:4.16.0")
 
+    // workr manager
+    implementation("androidx.work:work-runtime:2.8.1")
+
+    // firebase
+    implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
 }
