@@ -51,5 +51,9 @@
         android:id="@+id/forgotFragment"
         android:name="com.cropoptima.cropoptima.auth.forgotpassword.ForgotFragment"
         android:label="fragment_forgot"
-        tools:layout="@layout/fragment_forgot" />
+        tools:layout="@layout/fragment_forgot" >
+        <action
+            android:id="@+id/action_forgotFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
 </navigation>
