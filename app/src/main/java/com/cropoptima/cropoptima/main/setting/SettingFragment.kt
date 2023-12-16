@@ -87,17 +87,17 @@ class SettingFragment : Fragment() {
                     position: Int,
                     id: Long
                 ) {
-                    if(parent?.getItemAtPosition(position).toString() == language[1]) {
-                        setLocale("in", viewModel)
-                    } else {
-                        setLocale("en", viewModel)
-                    }
+//                    if(parent?.getItemAtPosition(position).toString() == language[1]) {
+//                        setLocale("in", viewModel)
+//                    } else {
+//                        setLocale("en", viewModel)
+//                    }
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                 }
             }
-            adapter = arrayAdapter
+//            adapter = arrayAdapter
         }
 
     }
