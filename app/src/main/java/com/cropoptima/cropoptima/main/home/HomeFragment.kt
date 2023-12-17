@@ -7,10 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.cropoptima.cropoptima.R
-import com.cropoptima.cropoptima.data.SuggestionItemList
+import com.cropoptima.cropoptima.data.SuggestionPlantList
 import com.cropoptima.cropoptima.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -38,8 +36,8 @@ class HomeFragment : Fragment() {
         val layoutManager = GridLayoutManager(binding.root.context, 2)
         var recycler = binding.rvSuggestion
         recycler.layoutManager = layoutManager
-        val adapter = SugestionItemAdapter()
-        adapter.submitList(SuggestionItemList.suggestionItemList)
+        val adapter = SugestionPlantAdapter()
+        adapter.submitList(SuggestionPlantList.suggestionItemList)
         recycler.adapter = adapter
 
 

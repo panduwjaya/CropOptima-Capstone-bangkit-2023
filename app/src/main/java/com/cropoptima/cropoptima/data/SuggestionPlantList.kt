@@ -1,11 +1,11 @@
 package com.cropoptima.cropoptima.data
 
-object SuggestionItemList {
-    val suggestionItemList = mutableListOf<SuggestionItem>()
+object SuggestionPlantList {
+    val suggestionItemList = mutableListOf<SuggestionPlant>()
 
     init {
         for (i in 1..22) {
-            val suggestionItem = SuggestionItem(
+            val suggestionItem = SuggestionPlant(
                 "item $i",
                 "Suggestion item $i description",
                 "https://picsum.photos/720?random=$i",

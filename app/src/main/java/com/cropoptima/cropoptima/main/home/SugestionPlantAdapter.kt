@@ -6,11 +6,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.cropoptima.cropoptima.data.SuggestionItem
+import com.cropoptima.cropoptima.data.SuggestionPlant
 import com.cropoptima.cropoptima.databinding.SuggestionRvItemBinding
 
-class SugestionItemAdapter : ListAdapter<SuggestionItem, SugestionItemAdapter.MyViewHolder>(DIFF_CALLBACK) {
+class SugestionPlantAdapter : ListAdapter<SuggestionPlant, SugestionPlantAdapter.MyViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding = SuggestionRvItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -18,13 +17,13 @@ class SugestionItemAdapter : ListAdapter<SuggestionItem, SugestionItemAdapter.My
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val suggestionItem = getItem(position) as SuggestionItem
+        val suggestionItem = getItem(position) as SuggestionPlant
         //TODO 9 : Bind data to ViewHolder (You can run app to check)
         holder.bind(suggestionItem)
     }
 
     class MyViewHolder(private val binding: SuggestionRvItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: SuggestionItem) {
+        fun bind(item: SuggestionPlant) {
             binding.tvName.text = item.name
             binding.tvDesc.text = item.desc
             Glide.with(binding.root)
@@ -43,12 +42,12 @@ class SugestionItemAdapter : ListAdapter<SuggestionItem, SugestionItemAdapter.My
         }
     }
     companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<SuggestionItem>() {
-            override fun areItemsTheSame(oldItem: SuggestionItem, newItem: SuggestionItem): Boolean {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<SuggestionPlant>() {
+            override fun areItemsTheSame(oldItem: SuggestionPlant, newItem: SuggestionPlant): Boolean {
                 return oldItem.name == newItem.name
             }
 
-            override fun areContentsTheSame(oldItem: SuggestionItem, newItem: SuggestionItem): Boolean {
+            override fun areContentsTheSame(oldItem: SuggestionPlant, newItem: SuggestionPlant): Boolean {
                 return oldItem == newItem
             }
         }
