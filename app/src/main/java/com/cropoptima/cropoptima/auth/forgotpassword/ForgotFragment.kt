@@ -32,6 +32,10 @@ class ForgotFragment : Fragment() {
 
         auth = FirebaseAuth.getInstance()
 
+        binding.imgArrowBack.setOnClickListener {
+            findNavController().navigate(R.id.action_forgotFragment_to_loginFragment)
+        }
+
         binding.btnReset.setOnClickListener {
             val email = binding.edEmail.text.toString()
             val edEmail = binding.edEmail

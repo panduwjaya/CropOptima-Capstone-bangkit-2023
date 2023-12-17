@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.cropoptima.cropoptima.R
 import com.cropoptima.cropoptima.databinding.FragmentRegisterBinding
 import com.google.android.material.snackbar.Snackbar
@@ -34,6 +35,10 @@ class RegisterFragment : Fragment() {
         binding.btnRegister.setOnClickListener {
             register()
 //            Snackbar.make(binding.root, "Register Successful", Snackbar.LENGTH_LONG).show()
+        }
+
+        binding.imgArrowBack.setOnClickListener {
+            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
         }
 
 
