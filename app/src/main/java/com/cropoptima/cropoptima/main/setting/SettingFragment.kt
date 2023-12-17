@@ -22,26 +22,25 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.cropoptima.cropoptima.R
+import com.cropoptima.cropoptima.databinding.FragmentRegisterBinding
 import com.cropoptima.cropoptima.databinding.FragmentSettingBinding
 
 class SettingFragment : Fragment() {
-
-    private var _binding: FragmentSettingBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentSettingBinding
 
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
     private lateinit var pref: SettingsPreference
     private lateinit var viewModel: SettingsViewModel
-
-    private val language: Array<String> = resources.getStringArray(R.array.language_array)
-    val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, language)
+    private lateinit var arrayAdapter: ArrayAdapter<String>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentSettingBinding.inflate(inflater, container, false)
+        binding = FragmentSettingBinding.inflate(inflater, container, false)
+        val language: Array<String> = binding.root.resources.getStringArray(R.array.language_array)
+         arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, language)
         return binding.root
     }
 

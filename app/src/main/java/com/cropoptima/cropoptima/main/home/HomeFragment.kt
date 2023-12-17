@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.cropoptima.cropoptima.R
 import com.cropoptima.cropoptima.data.SuggestionPlantList
@@ -30,7 +31,7 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
 
         binding.ivSetting.setOnClickListener {
-            Navigation.findNavController(root).navigate(R.id.action_home_to_setting)
+            findNavController().navigate(R.id.action_home_to_setting)
         }
 
         val layoutManager = GridLayoutManager(binding.root.context, 2)
