@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.CompoundButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -20,6 +21,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import com.cropoptima.cropoptima.R
 import com.cropoptima.cropoptima.databinding.FragmentSettingBinding
 
 class SettingFragment : Fragment() {
@@ -30,6 +32,9 @@ class SettingFragment : Fragment() {
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
     private lateinit var pref: SettingsPreference
     private lateinit var viewModel: SettingsViewModel
+
+    private val language: Array<String> = resources.getStringArray(R.array.language_array)
+    val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, language)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
