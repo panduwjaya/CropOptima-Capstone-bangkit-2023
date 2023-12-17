@@ -76,4 +76,8 @@ dependencies {
 
     // firebase
     implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
+
+    // carousel
+    implementation("com.tbuonomo:dotsindicator:5.0")
+
 }

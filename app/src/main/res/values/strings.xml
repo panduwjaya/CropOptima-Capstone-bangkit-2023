@@ -37,6 +37,7 @@
         nulla. Donec rhoncus libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus vestibulum. Fusce dictum
         libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="on_click_handler">Feature not implemented yet\n\n</string>
 
     <string-array name="bahasa">
         <item>Indonesian</item>
