@@ -32,7 +32,7 @@ class CarouselHomeAdapter(private val onItemClick: (SuggestionRecently) -> Unit)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarouselViewHolder {
         val binding =
             ItemSuggestRecentlyBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        binding.root.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+//        binding.root.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
 
         return CarouselViewHolder(binding)
     }
