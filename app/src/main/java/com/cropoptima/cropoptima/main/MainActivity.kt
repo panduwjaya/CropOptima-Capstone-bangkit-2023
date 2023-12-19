@@ -14,6 +14,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.cropoptima.cropoptima.R
 import com.cropoptima.cropoptima.auth.AuthActivity
 import com.cropoptima.cropoptima.databinding.ActivityMainBinding
+import com.cropoptima.cropoptima.utils.Utils
 
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
@@ -44,6 +45,7 @@ MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         val user = Firebase.auth.currentUser
+        Log.i("info", Utils.getCurrentUserIdToken())
         Toast.makeText(this, "Login Successful", Toast.LENGTH_LONG).show()
 
         if (user == null) {

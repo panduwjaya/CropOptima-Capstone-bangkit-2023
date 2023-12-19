@@ -72,7 +72,7 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.16.0")
 
     // workr manager
-    implementation("androidx.work:work-runtime:2.8.1")
+    implementation("androidx.work:work-runtime:2.9.0")
 
     // firebase
     implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
