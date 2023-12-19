@@ -13,6 +13,7 @@ import com.cropoptima.cropoptima.R
 import com.cropoptima.cropoptima.auth.AuthActivity
 import com.cropoptima.cropoptima.databinding.FragmentHomeBinding
 import com.cropoptima.cropoptima.databinding.FragmentProfileBinding
+import com.cropoptima.cropoptima.utils.Utils.getCurrentUserIdToken
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -34,6 +35,7 @@ class ProfileFragment : Fragment() {
         auth = Firebase.auth
         user = auth.currentUser!!
         Log.i("info", user.photoUrl.toString())
+
 
         binding.ivLogout.setOnClickListener { logout() }
         binding.tvLogout.setOnClickListener { logout() }
