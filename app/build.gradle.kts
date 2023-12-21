@@ -87,6 +87,10 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
 
+
+    // androidx browser
+    implementation("androidx.browser:browser:1.7.0")
+
     // dagger hilt
     implementation("com.google.dagger:hilt-android:2.28-alpha")
     kapt("com.google.dagger:hilt-android-compiler:2.28-alpha")
