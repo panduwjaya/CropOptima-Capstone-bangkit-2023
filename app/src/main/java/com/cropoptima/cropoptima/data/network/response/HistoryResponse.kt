@@ -4,11 +4,14 @@ import com.google.gson.annotations.SerializedName
 
 data class HistoryResponse(
 
-	@field:SerializedName("HistoryResponse")
-	val historyResponse: List<HistoryResponseItem?>? = null
+	@field:SerializedName("histories")
+	val histories: List<HistoriesItem?>? = null,
+
+	@field:SerializedName("error")
+	val error: String? = null
 )
 
-data class HistoryResponseItem(
+data class HistoriesItem(
 
 	@field:SerializedName("imageURL")
 	val imageURL: String? = null,
@@ -25,4 +28,3 @@ data class HistoryResponseItem(
 	@field:SerializedName("email")
 	val email: String? = null
 )
-

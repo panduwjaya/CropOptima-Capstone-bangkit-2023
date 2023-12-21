@@ -6,8 +6,12 @@ import retrofit2.http.POST
 
 interface ApiService {
     @POST("history?")
-    suspend fun postHistory(): HistoryResponse
+    suspend fun postHistory(
+
+    ): HistoryResponse
 
     @POST("register")
-    suspend fun postPredict(): PredictResponse
+    suspend fun postPredict(
+
+    ): PredictResponse
 }

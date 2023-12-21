@@ -4,6 +4,15 @@ import com.google.gson.annotations.SerializedName
 
 data class PredictResponse(
 
+	@field:SerializedName("error")
+	val error: String? = null,
+
+	@field:SerializedName("message")
+	val message: Message? = null
+)
+
+data class Message(
+
 	@field:SerializedName("imageURL")
 	val imageURL: String? = null,
 

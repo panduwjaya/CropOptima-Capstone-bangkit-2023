@@ -28,7 +28,7 @@
                 app:layout_constraintVertical_bias="0.7" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout4"
+                android:id="@+id/textInput_phTanah"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
@@ -41,18 +41,18 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Nitrogen" />
+                    android:hint="Ph Tanah" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout3"
+                android:id="@+id/textInput_kalium"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
+                app:layout_constraintTop_toBottomOf="@+id/textInput_protein"
                 app:layout_constraintVertical_bias="0.0">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -62,14 +62,14 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout2"
+                android:id="@+id/textInput_protein"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+                app:layout_constraintTop_toBottomOf="@+id/textInput_nitrogen"
                 app:layout_constraintVertical_bias="0.0">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -79,7 +79,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <ImageView
-                android:id="@+id/imageView7"
+                android:id="@+id/img_symbolLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -91,7 +91,7 @@
                 app:srcCompat="@drawable/location" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/tv_nameLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nama Lokasi"
@@ -100,7 +100,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.1"
-                app:layout_constraintStart_toEndOf="@+id/imageView7"
+                app:layout_constraintStart_toEndOf="@+id/img_symbolLocation"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.05" />
 
@@ -111,6 +111,7 @@
                 android:text="Input NPK"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                android:layout_marginStart="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.027"
@@ -130,7 +131,7 @@
                 app:layout_constraintVertical_bias="0.12" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout"
+                android:id="@+id/textInput_nitrogen"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
@@ -147,17 +148,17 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btn_detection"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Lihat Hasil"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_bias="0.898"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout4"
-                app:layout_constraintVertical_bias="0.1" />
+                app:layout_constraintTop_toBottomOf="@+id/textInput_phTanah"
+                app:layout_constraintVertical_bias="0.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
