@@ -66,6 +66,7 @@
             android:layout_marginEnd="8dp"
             android:backgroundTintMode="add"
             android:maxLines="3"
+            android:ellipsize="end"
             android:shadowColor="#000000"
             android:text="TextView"
             android:textColor="@color/white"
