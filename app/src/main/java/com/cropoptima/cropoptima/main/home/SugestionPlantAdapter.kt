@@ -1,13 +1,16 @@
 package com.cropoptima.cropoptima.main.home
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.cropoptima.cropoptima.data.SuggestionPlant
 import com.cropoptima.cropoptima.databinding.SuggestionRvItemBinding
+
 
 class SugestionPlantAdapter : ListAdapter<SuggestionPlant, SugestionPlantAdapter.MyViewHolder>(DIFF_CALLBACK) {
 
@@ -31,14 +34,13 @@ class SugestionPlantAdapter : ListAdapter<SuggestionPlant, SugestionPlantAdapter
 //                .diskCacheStrategy(DiskCacheStrategy.NONE )
 //                .skipMemoryCache(true)
                 .into(binding.imageView5)
-
-
-//            binding.root.setOnClickListener {
-//                val context = binding.root.context
-//                val intent = Intent(context, DetailUserActivity::class.java)
-//                intent.putExtra(PARCEL_NAME, item)
-//                context.startActivity(intent)
-//            }
+            binding.root.setOnClickListener {
+                val context = binding.root.context
+                val url = item.url
+                val intent = CustomTabsIntent.Builder()
+                    .build()
+                intent.launchUrl(context, Uri.parse(url))
+            }
         }
     }
     companion object {

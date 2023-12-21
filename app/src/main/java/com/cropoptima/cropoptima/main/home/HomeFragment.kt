@@ -2,6 +2,7 @@ package com.cropoptima.cropoptima.main.home
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +24,7 @@ import com.cropoptima.cropoptima.databinding.FragmentHomeBinding
 import com.cropoptima.cropoptima.main.setting.SettingsPreference
 import com.cropoptima.cropoptima.main.setting.SettingsViewModel
 import com.cropoptima.cropoptima.main.setting.SettingsViewModelFactory
+import com.cropoptima.cropoptima.utils.Utils
 import com.dicoding.frency.ui.adapter.CarouselHomeAdapter
 
 class HomeFragment : Fragment() {
@@ -60,8 +62,10 @@ class HomeFragment : Fragment() {
         val recycler = binding.rvSuggestion
         recycler.layoutManager = layoutManager
         val adapter2 = SugestionPlantAdapter()
-        adapter2.submitList(SuggestionPlantList.suggestionItemList)
+        adapter2.submitList(SuggestionPlantList.suggestionItemList.shuffled())
         recycler.adapter = adapter2
+
+        Log.i("info", SuggestionPlantList.suggestionItemList.count().toString())
 
         carouselHomeAdapter.submitList(SuggestionRecentlyList.suggestionRecentlyList)
 
