@@ -39,7 +39,6 @@ class HomeFragment : Fragment() {
     private val carouselHomeAdapter: CarouselHomeAdapter by lazy { CarouselHomeAdapter(::carouselItemClicked) }
     private lateinit var settingsViewModel: SettingsViewModel
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
-val pref = SettingsPreference.getInstance(requireContext().dataStore)
 
     private val factory: MainViewModelFactory by lazy {
         MainViewModelFactory.getInstance(binding.root.context)

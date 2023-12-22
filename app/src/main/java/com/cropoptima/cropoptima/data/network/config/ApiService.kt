@@ -8,19 +8,20 @@ import retrofit2.http.POST
 
 interface ApiService {
     @FormUrlEncoded
-    @POST("history?")
+    @POST("history")
     suspend fun postHistory(
         @Field("idToken") idToken: String,
     ): HistoryResponse
 
+    @FormUrlEncoded
     @POST("register")
     suspend fun postPredict(
         @Field("idToken") idToken: String,
         @Field("n") n: Float,
         @Field("p") p: Float,
         @Field("k") k: Float,
-        @Field("password") ph: Float,
-        @Field("password") lat: Float,
-        @Field("password") lon: Float,
+        @Field("ph") ph: Float,
+        @Field("lat") lat: Float,
+        @Field("lon") lon: Float,
     ): PredictResponse
 }
