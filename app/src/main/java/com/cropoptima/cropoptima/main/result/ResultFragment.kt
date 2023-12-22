@@ -57,7 +57,6 @@ class ResultFragment : Fragment() {
         Glide.with(requireActivity())
             .load(dataImg)
             .transition(DrawableTransitionOptions.withCrossFade())
-            .apply(RequestOptions.circleCropTransform())
             .into(binding.ivSayur)
         binding.tvNamaSayur.text = dataCrop
         binding.tvKeterangan.text = dataDescription
