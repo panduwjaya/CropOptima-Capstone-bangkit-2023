@@ -2,6 +2,7 @@ package com.cropoptima.cropoptima.main.maps
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.cropoptima.cropoptima.R
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
