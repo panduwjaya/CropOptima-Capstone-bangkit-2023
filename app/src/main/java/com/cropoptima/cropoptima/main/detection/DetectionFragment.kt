@@ -25,6 +25,13 @@ class DetectionFragment : Fragment() {
         factory
     }
 
+    companion object {
+        const val EXTRA_IMG = "extra_img"
+        const val EXTRA_DESCRIPTION = "extra_description"
+        const val EXTRA_LOCATION = "extra_"
+        const val EXTRA_CROP = "extra_parcel"
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -60,12 +67,13 @@ class DetectionFragment : Fragment() {
 
                     }
                     is Result.Success -> {
-                        val imgUrl = result.data.message?.imageURL
-                        val description = result.data.message?.description
-                        val location = result.data.message?.location
-                        val crop = result.data.message?.crop
+                        val mBundle = Bundle()
+                        mBundle.putString(EXTRA_IMG,result.data.message?.imageURL)
+                        mBundle.putString(EXTRA_DESCRIPTION,result.data.message?.description)
+                        mBundle.putString(EXTRA_LOCATION,result.data.message?.location)
+                        mBundle.putString(EXTRA_CROP,result.data.message?.crop)
                         Toast.makeText(context, "Detection is success", Toast.LENGTH_LONG).show()
-                        view?.findNavController()?.navigate(R.id.action_detection_to_resultFragment)
+                        view?.findNavController()?.navigate(R.id.action_detection_to_resultFragment,mBundle)
                     }
 
                     is Result.Error -> {
