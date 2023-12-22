@@ -47,7 +47,6 @@ class CropOptimaRepository(
             Log.i("info", e.message())
             emit(Result.Error(errorMessage ?: "error"))
         }
-        Log.i("info", "selesai")
     }
 
     fun postPredict(idToken: String,n: Float,p:Float,k: Float,ph: Float,lat: Float,lon: Float): LiveData<Result<PredictResponse>> = liveData{
@@ -61,10 +60,9 @@ class CropOptimaRepository(
             emit(Result.Error(errorMessage))
         } catch (e: HttpException) {
             //get error message
-            val jsonInString = e.response()?.errorBody()?.string()
-            val errorBody = Gson().fromJson(jsonInString, PredictResponse::class.java)
-            val errorMessage = errorBody.message
-            emit(Result.Error(errorMessage.toString() ?: "error"))
+            Log.i("info", e.message().toString())
+
+            emit(Result.Error(e.message().toString() ?: "error"))
         }
     }
 }
