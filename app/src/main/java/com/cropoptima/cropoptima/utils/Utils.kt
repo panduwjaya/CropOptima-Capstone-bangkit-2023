@@ -14,7 +14,6 @@ object Utils {
         var token = ""
         user.getIdToken(true).addOnCompleteListener {
             token = it.result.token.toString()
-            Log.i("info", it.result.token.toString())
         }
         return token
     }

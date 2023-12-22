@@ -45,7 +45,6 @@ MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         val user = Firebase.auth.currentUser
-        Log.i("info", Utils.getCurrentUserIdToken())
         Toast.makeText(this, "Login Successful", Toast.LENGTH_LONG).show()
 
         if (user == null) {

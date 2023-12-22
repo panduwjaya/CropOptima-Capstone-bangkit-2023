@@ -1,6 +1,9 @@
 package com.cropoptima.cropoptima.data.network.response
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
+
 
 data class PredictResponse(
 
@@ -11,6 +14,7 @@ data class PredictResponse(
 	val message: Message? = null
 )
 
+@Parcelize
 data class Message(
 
 	@field:SerializedName("imageURL")
@@ -24,4 +28,4 @@ data class Message(
 
 	@field:SerializedName("crop")
 	val crop: String? = null
-)
+): Parcelable

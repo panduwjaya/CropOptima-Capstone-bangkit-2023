@@ -4,6 +4,8 @@ plugins {
     id("com.google.gms.google-services")
     id("kotlin-kapt")
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+    id("kotlin-parcelize")
+
 }
 
 android {
@@ -90,4 +92,7 @@ dependencies {
 
     // androidx browser
     implementation("androidx.browser:browser:1.7.0")
+
+    // dataStore
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
 }

@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_home_to_detection"
             app:destination="@id/detection" />
+        <action
+            android:id="@+id/action_home_to_resultFragment"
+            app:destination="@id/resultFragment" />
     </fragment>
     <fragment
         android:id="@+id/detection"
@@ -41,7 +44,8 @@
     <fragment
         android:id="@+id/resultFragment"
         android:name="com.cropoptima.cropoptima.main.result.ResultFragment"
-        android:label="ResultFragment" >
+        android:label="ResultFragment"
+        tools:layout="@layout/fragment_result">
         <action
             android:id="@+id/action_resultFragment_to_detection"
             app:destination="@id/detection" />

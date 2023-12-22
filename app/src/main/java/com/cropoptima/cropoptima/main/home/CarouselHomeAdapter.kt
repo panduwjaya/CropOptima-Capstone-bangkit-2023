@@ -6,24 +6,24 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.cropoptima.cropoptima.data.SuggestionRecently
+import com.cropoptima.cropoptima.data.network.response.HistoriesItem
 import com.cropoptima.cropoptima.databinding.ItemSuggestRecentlyBinding
 
-class CarouselHomeAdapter(private val onItemClick: (SuggestionRecently) -> Unit) :
-    ListAdapter<SuggestionRecently, CarouselHomeAdapter.CarouselViewHolder>(DIFF_CALLBACK) {
+class CarouselHomeAdapter(private val onItemClick: (HistoriesItem) -> Unit) :
+    ListAdapter<HistoriesItem, CarouselHomeAdapter.CarouselViewHolder>(DIFF_CALLBACK) {
 
     inner class CarouselViewHolder(private val binding: ItemSuggestRecentlyBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: SuggestionRecently) {
+        fun bind(item: HistoriesItem) {
             binding.apply {
                 Glide.with(binding.root)
-                    .load(item.imageUrl)
+                    .load(item.imageURL)
 //                .diskCacheStrategy(DiskCacheStrategy.NONE )
 //                .skipMemoryCache(true)
                     .into(binding.ivRecentImage)
                 tvRecentLocation.text = item.location
-                tvPlantName.text = item.plantResult
+                tvPlantName.text = item.crop
                 root.setOnClickListener { onItemClick(item) }
             }
         }
@@ -47,12 +47,12 @@ class CarouselHomeAdapter(private val onItemClick: (SuggestionRecently) -> Unit)
     }
 
     companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<SuggestionRecently>() {
-            override fun areItemsTheSame(oldItem: SuggestionRecently, newItem: SuggestionRecently): Boolean =
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<HistoriesItem>() {
+            override fun areItemsTheSame(oldItem: HistoriesItem, newItem: HistoriesItem): Boolean =
                 oldItem == newItem
 
-            override fun areContentsTheSame(oldItem: SuggestionRecently, newItem: SuggestionRecently): Boolean =
-                oldItem.location == newItem.location  && oldItem.imageUrl == newItem.imageUrl
+            override fun areContentsTheSame(oldItem: HistoriesItem, newItem: HistoriesItem): Boolean =
+                oldItem.location == newItem.location  && oldItem.crop == newItem.crop
         }
     }
 }

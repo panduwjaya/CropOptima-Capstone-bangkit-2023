@@ -30,6 +30,7 @@ class DetectionFragment : Fragment() {
         const val EXTRA_DESCRIPTION = "extra_description"
         const val EXTRA_LOCATION = "extra_"
         const val EXTRA_CROP = "extra_parcel"
+        const val EXTRA_PARCEL = "extra_parcel"
     }
 
     override fun onCreateView(

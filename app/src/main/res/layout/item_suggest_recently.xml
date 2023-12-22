@@ -28,7 +28,7 @@
 
         <ImageView
             android:id="@+id/iv_recent_image"
-            android:layout_width="149dp"
+            android:layout_width="match_parent"
             android:layout_height="149dp"
             android:src="@drawable/login_leaf" />
 
