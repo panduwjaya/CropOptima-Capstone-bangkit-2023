@@ -27,4 +27,18 @@ class SettingsViewModel(private val pref: SettingsPreference) : ViewModel() {
             pref.saveLocaleSetting(localeName)
         }
     }
+
+    fun getlat(): LiveData<Double> {
+        return pref.getLat().asLiveData()
+    }
+
+    fun getlon(): LiveData<Double> {
+        return pref.getLon().asLiveData()
+    }
+
+    fun saveLatAndLot(lat: Double,lon: Double) {
+        viewModelScope.launch {
+            pref.saveLatAndLon(lat,lon)
+        }
+    }
 }
