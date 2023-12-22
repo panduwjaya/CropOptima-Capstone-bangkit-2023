@@ -42,7 +42,8 @@
                     android:id="@+id/input_phTanah"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Ph Tanah" />
+                    android:hint="Ph Tanah"
+                    android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -60,7 +61,8 @@
                     android:id="@+id/input_kalium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Kalium" />
+                    android:hint="Kalium"
+                    android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -78,7 +80,8 @@
                     android:id="@+id/input_protein"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Protein" />
+                    android:hint="Protein"
+                    android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <ImageView
@@ -111,10 +114,10 @@
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
                 android:text="Input NPK"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:layout_marginStart="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.027"
@@ -148,7 +151,8 @@
                     android:id="@+id/input_nitrogen"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Nitrogen" />
+                    android:hint="Nitrogen"
+                    android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
