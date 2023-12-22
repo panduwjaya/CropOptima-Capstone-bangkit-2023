@@ -14,23 +14,24 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
+import com.cropoptima.cropoptima.utils.Result
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.cropoptima.cropoptima.R
 import com.cropoptima.cropoptima.data.SuggestionPlantList
 import com.cropoptima.cropoptima.data.SuggestionRecently
 import com.cropoptima.cropoptima.data.SuggestionRecentlyList
+import com.cropoptima.cropoptima.data.network.response.HistoriesItem
+import com.cropoptima.cropoptima.data.network.response.Message
 import com.cropoptima.cropoptima.databinding.FragmentHomeBinding
+import com.cropoptima.cropoptima.main.detection.DetectionFragment
 import com.cropoptima.cropoptima.main.setting.SettingsPreference
 import com.cropoptima.cropoptima.main.setting.SettingsViewModel
 import com.cropoptima.cropoptima.main.setting.SettingsViewModelFactory
 import com.cropoptima.cropoptima.utils.MainViewModelFactory
-import com.cropoptima.cropoptima.utils.TokenPreference
-import com.cropoptima.cropoptima.utils.TokenViewModel
-import com.cropoptima.cropoptima.utils.TokenViewModelFactory
-import com.cropoptima.cropoptima.utils.Utils
 import com.dicoding.frency.ui.adapter.CarouselHomeAdapter
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 
 class HomeFragment : Fragment() {
 
@@ -39,15 +40,14 @@ class HomeFragment : Fragment() {
     private lateinit var settingsViewModel: SettingsViewModel
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
-    private lateinit var tokenViewModel: TokenViewModel
-
     private val factory: MainViewModelFactory by lazy {
-        MainViewModelFactory.getInstance(requireActivity())
+        MainViewModelFactory.getInstance(binding.root.context)
     }
 
     private val homeViewModel: HomeViewModel by viewModels {
         factory
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -59,15 +59,7 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-        tokenViewModel =
-            ViewModelProvider(requireActivity(), TokenViewModelFactory(TokenPreference.getInstance(requireContext().dataStore))).get(
-                TokenViewModel::class.java
-            )
-
-        val idToken = tokenViewModel.readToken() as String
-        homeViewModel.postHistory(idToken)
-
+        loadHistoryData()
         binding.ivSetting.setOnClickListener {
             findNavController().navigate(R.id.action_home_to_setting)
         }
@@ -76,6 +68,7 @@ class HomeFragment : Fragment() {
             ViewModelProvider(requireActivity(), SettingsViewModelFactory(SettingsPreference.getInstance(requireContext().dataStore))).get(
                 SettingsViewModel::class.java
             )
+
         checkSavedTheme()
 
         val layoutManager = GridLayoutManager(binding.root.context, 2)
@@ -85,22 +78,58 @@ class HomeFragment : Fragment() {
         adapter2.submitList(SuggestionPlantList.suggestionItemList.shuffled())
         recycler.adapter = adapter2
 
-        Log.i("info", SuggestionPlantList.suggestionItemList.count().toString())
-
-        carouselHomeAdapter.submitList(SuggestionRecentlyList.suggestionRecentlyList)
-
-        with(binding) {
-            this.carouselPager.apply {
-                adapter = carouselHomeAdapter
-                dotsIndicator.attachTo(this)
-            }
-        }
-
         return root
     }
 
-    private fun carouselItemClicked(suggestionRecently: SuggestionRecently) {
-        Toast.makeText(binding.root.context, suggestionRecently.location, Toast.LENGTH_SHORT).show()
+    private fun loadHistoryData() {
+        val user = Firebase.auth.currentUser
+        user?.getIdToken(true)?.addOnCompleteListener {
+            homeViewModel.postHistory(it.result.token!!).observe(viewLifecycleOwner) { result ->
+                when (result) {
+                    is Result.Loading -> {
+                        // Handle loading state
+//                        binding.pbListFranchise.visibility = View.VISIBLE
+                    }
+
+                    is Result.Success -> {
+//                        binding.pbListFranchise.visibility = View.GONE
+                        val dataHistory = result.data.histories
+                        if (dataHistory != null) {
+                            // Tampilkan data di RecyclerView
+                            Log.d("data", dataHistory.toString())
+                            carouselHomeAdapter.submitList(dataHistory)
+
+                            with(binding) {
+                                this.carouselPager.apply {
+                                    adapter = carouselHomeAdapter
+
+                                    dotsIndicator.attachTo(this)
+                                }
+                            }
+                        } else {
+                            // Tampilkan pesan jika tidak ada data
+//                            binding.tvNoData.visibility = View.VISIBLE
+                        }
+                    }
+
+                    is Result.Error -> {
+                        // Handle error state
+//                        binding.pbListFranchise.visibility = View.GONE
+                    }
+
+                    else -> {}
+                }
+
+            }
+        }
+    }
+
+    private fun carouselItemClicked(historiesItem: HistoriesItem) {
+        val message = Message(historiesItem.imageURL, historiesItem.description,
+            historiesItem.location, historiesItem.crop)
+        val bundle = Bundle()
+        bundle.putParcelable(DetectionFragment.EXTRA_CROP, message)
+        findNavController().navigate(R.id.action_home_to_resultFragment, bundle)
     }
 
     private fun checkSavedTheme() {

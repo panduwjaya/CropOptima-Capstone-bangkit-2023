@@ -38,10 +38,6 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val pref = TokenPreference.getInstance(requireActivity().application.dataStore)
-        val viewModel = ViewModelProvider(requireActivity(), TokenViewModelFactory(pref)).get(
-            TokenViewModel::class.java
-        )
         binding.btnLogin.setOnClickListener {
             startActivity(Intent(binding.root.context, MainActivity::class.java))
             activity?.finish()
@@ -60,7 +56,6 @@ class LoginFragment : Fragment() {
 
             auth.signInWithEmailAndPassword(email,password).addOnCompleteListener { task ->
                 if(task.isSuccessful){
-                    viewModel.saveToken(Utils.getCurrentUserIdToken())
                     val intent= Intent(binding.root.context, MainActivity::class.java)
                     startActivity(intent)
                     activity?.finish()

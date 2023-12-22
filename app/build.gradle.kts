@@ -3,7 +3,8 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("com.google.gms.google-services")
     id("kotlin-kapt")
-    id("dagger.hilt.android.plugin")
+    id("kotlin-parcelize")
+
 }
 
 android {
@@ -90,10 +91,6 @@ dependencies {
 
     // androidx browser
     implementation("androidx.browser:browser:1.7.0")
-
-    // dagger hilt
-    implementation("com.google.dagger:hilt-android:2.28-alpha")
-    kapt("com.google.dagger:hilt-android-compiler:2.28-alpha")
 
     // dataStore
     implementation("androidx.datastore:datastore-preferences:1.0.0")
