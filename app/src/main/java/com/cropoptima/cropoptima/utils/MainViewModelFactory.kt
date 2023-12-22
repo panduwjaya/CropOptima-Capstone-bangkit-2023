@@ -4,13 +4,14 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.cropoptima.cropoptima.data.network.repository.CropOptimaRepository
+import com.cropoptima.cropoptima.main.detection.DetectionViewModel
 
 class MainViewModelFactory private constructor(private val cropOptimaRepository: CropOptimaRepository):
     ViewModelProvider.NewInstanceFactory(){
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(RegisterViewModel::class.java)){
-            return RegisterViewModel(storyRepository) as T
+        if (modelClass.isAssignableFrom(DetectionViewModel::class.java)){
+            return DetectionViewModel(cropOptimaRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }
@@ -20,7 +21,7 @@ class MainViewModelFactory private constructor(private val cropOptimaRepository:
         private var instance: MainViewModelFactory? = null
         fun getInstance(context: Context): MainViewModelFactory =
             instance ?: synchronized(this) {
-                instance ?: MainViewModelFactory(Injection.provideRepository(context))
+                instance ?: MainViewModelFactory(provideRepository(context))
             }.also { instance = it }
     }
 }

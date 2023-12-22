@@ -5,17 +5,30 @@ import androidx.lifecycle.liveData
 import com.cropoptima.cropoptima.data.network.config.ApiService
 import com.cropoptima.cropoptima.data.network.response.HistoryResponse
 import com.cropoptima.cropoptima.data.network.response.PredictResponse
+import com.cropoptima.cropoptima.utils.Result
 import com.google.gson.Gson
 import retrofit2.HttpException
 import java.net.SocketTimeoutException
-import com.cropoptima.cropoptima.utils.Result
 
-class CropOptimaRepository(private val apiService: ApiService){
-    fun postHistory(name: String, email: String, password: String): LiveData<Result<HistoryResponse>> = liveData{
+class CropOptimaRepository(
+    private val apiService: ApiService,
+){
+
+    companion object {
+        @Volatile
+        private var instance: CropOptimaRepository? = null
+        fun getInstance(
+            apiService: ApiService
+        ): CropOptimaRepository =
+            instance ?: synchronized(this) {
+                instance ?: CropOptimaRepository(apiService)
+            }.also { instance = it }
+    }
+    fun postHistory(idToken: String): LiveData<Result<HistoryResponse>> = liveData{
         emit(Result.Loading)
         try {
             //get success message
-            val responseMessage = apiService.postHistory(name,email,password)
+            val responseMessage = apiService.postHistory(idToken)
             emit(Result.Success(responseMessage))
         } catch (e: SocketTimeoutException){
             val errorMessage = "Koneksi ke server Gagal"
@@ -24,16 +37,16 @@ class CropOptimaRepository(private val apiService: ApiService){
             //get error message
             val jsonInString = e.response()?.errorBody()?.string()
             val errorBody = Gson().fromJson(jsonInString, HistoryResponse::class.java)
-            val errorMessage = errorBody.message
+            val errorMessage = errorBody.error
             emit(Result.Error(errorMessage))
         }
     }
 
-    fun postPredict(n: Float,p:Float,k: Float,ph: Float,lat: Float,lon: Float): LiveData<Result<PredictResponse>> = liveData{
+    fun postPredict(idToken: String,n: Float,p:Float,k: Float,ph: Float,lat: Float,lon: Float): LiveData<Result<PredictResponse>> = liveData{
         emit(Result.Loading)
         try {
             //get success message
-            val responseMessage = apiService.postPredict(n,p,k,ph,lat,lon)
+            val responseMessage = apiService.postPredict(idToken,n,p,k,ph,lat,lon)
             emit(Result.Success(responseMessage))
         } catch (e: SocketTimeoutException){
             val errorMessage = "Koneksi ke server Gagal"

@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
@@ -24,15 +25,29 @@ import com.cropoptima.cropoptima.databinding.FragmentHomeBinding
 import com.cropoptima.cropoptima.main.setting.SettingsPreference
 import com.cropoptima.cropoptima.main.setting.SettingsViewModel
 import com.cropoptima.cropoptima.main.setting.SettingsViewModelFactory
+import com.cropoptima.cropoptima.utils.MainViewModelFactory
+import com.cropoptima.cropoptima.utils.TokenPreference
+import com.cropoptima.cropoptima.utils.TokenViewModel
+import com.cropoptima.cropoptima.utils.TokenViewModelFactory
 import com.cropoptima.cropoptima.utils.Utils
 import com.dicoding.frency.ui.adapter.CarouselHomeAdapter
 
 class HomeFragment : Fragment() {
+
     private lateinit var binding: FragmentHomeBinding
     private val carouselHomeAdapter: CarouselHomeAdapter by lazy { CarouselHomeAdapter(::carouselItemClicked) }
     private lateinit var settingsViewModel: SettingsViewModel
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
+    private lateinit var tokenViewModel: TokenViewModel
+
+    private val factory: MainViewModelFactory by lazy {
+        MainViewModelFactory.getInstance(requireActivity())
+    }
+
+    private val homeViewModel: HomeViewModel by viewModels {
+        factory
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -44,6 +59,14 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        tokenViewModel =
+            ViewModelProvider(requireActivity(), TokenViewModelFactory(TokenPreference.getInstance(requireContext().dataStore))).get(
+                TokenViewModel::class.java
+            )
+
+        val idToken = tokenViewModel.readToken() as String
+        homeViewModel.postHistory(idToken)
 
         binding.ivSetting.setOnClickListener {
             findNavController().navigate(R.id.action_home_to_setting)

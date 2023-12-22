@@ -13,13 +13,20 @@
         <action
             android:id="@+id/action_home_to_setting"
             app:destination="@id/setting" />
+        <action
+            android:id="@+id/action_home_to_detection"
+            app:destination="@id/detection" />
     </fragment>
     <fragment
         android:id="@+id/detection"
         android:name="com.cropoptima.cropoptima.main.detection.DetectionFragment"
         android:label="DetectionFragment"
         tools:layout="@layout/fragment_detection"
-        />
+        >
+        <action
+            android:id="@+id/action_detection_to_resultFragment"
+            app:destination="@id/resultFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profile"
         android:name="com.cropoptima.cropoptima.main.profile.ProfileFragment"
@@ -31,5 +38,13 @@
         android:label="SettingFragment"
         tools:layout="@layout/fragment_setting"
         />
+    <fragment
+        android:id="@+id/resultFragment"
+        android:name="com.cropoptima.cropoptima.main.result.ResultFragment"
+        android:label="ResultFragment" >
+        <action
+            android:id="@+id/action_resultFragment_to_detection"
+            app:destination="@id/detection" />
+    </fragment>
 
 </navigation>

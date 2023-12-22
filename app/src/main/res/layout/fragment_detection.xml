@@ -39,6 +39,7 @@
                 app:layout_constraintVertical_bias="0.05">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_phTanah"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Ph Tanah" />
@@ -56,6 +57,7 @@
                 app:layout_constraintVertical_bias="0.0">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_kalium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Kalium" />
@@ -73,6 +75,7 @@
                 app:layout_constraintVertical_bias="0.0">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_protein"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Protein" />
@@ -142,6 +145,7 @@
                 app:layout_constraintVertical_bias="0.0">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_nitrogen"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Nitrogen" />

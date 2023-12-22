@@ -8,10 +8,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.cropoptima.cropoptima.R
 import com.cropoptima.cropoptima.databinding.FragmentLoginBinding
 import com.cropoptima.cropoptima.main.MainActivity
+import com.cropoptima.cropoptima.utils.TokenPreference
+import com.cropoptima.cropoptima.utils.TokenViewModel
+import com.cropoptima.cropoptima.utils.TokenViewModelFactory
+import com.cropoptima.cropoptima.utils.Utils
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
@@ -33,6 +38,10 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val pref = TokenPreference.getInstance(requireActivity().application.dataStore)
+        val viewModel = ViewModelProvider(requireActivity(), TokenViewModelFactory(pref)).get(
+            TokenViewModel::class.java
+        )
         binding.btnLogin.setOnClickListener {
             startActivity(Intent(binding.root.context, MainActivity::class.java))
             activity?.finish()
@@ -45,7 +54,21 @@ class LoginFragment : Fragment() {
         binding.tvIHaveAccount.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
-        binding.btnLogin.setOnClickListener {login()}
+        binding.btnLogin.setOnClickListener {
+            val email = binding.edEmail.text.toString()
+            val password = binding.edPassword.text.toString()
+
+            auth.signInWithEmailAndPassword(email,password).addOnCompleteListener { task ->
+                if(task.isSuccessful){
+                    viewModel.saveToken(Utils.getCurrentUserIdToken())
+                    val intent= Intent(binding.root.context, MainActivity::class.java)
+                    startActivity(intent)
+                    activity?.finish()
+                }
+            }.addOnFailureListener { exception ->
+                Toast.makeText(binding.root.context ,exception.localizedMessage, Toast.LENGTH_LONG).show()
+            }
+        }
         binding.tvSignUp.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
@@ -53,19 +76,19 @@ class LoginFragment : Fragment() {
 
     }
 
-    private fun login() {
-        val email = binding.edEmail.text.toString()
-        val password = binding.edPassword.text.toString()
-
-        auth.signInWithEmailAndPassword(email,password).addOnCompleteListener { task ->
-            if(task.isSuccessful){
-                val intent= Intent(binding.root.context, MainActivity::class.java)
-                startActivity(intent)
-                activity?.finish()
-            }
-        }.addOnFailureListener { exception ->
-            Toast.makeText(binding.root.context ,exception.localizedMessage, Toast.LENGTH_LONG).show()
-        }
-    }
+//    private fun login() {
+//        val email = binding.edEmail.text.toString()
+//        val password = binding.edPassword.text.toString()
+//
+//        auth.signInWithEmailAndPassword(email,password).addOnCompleteListener { task ->
+//            if(task.isSuccessful){
+//                val intent= Intent(binding.root.context, MainActivity::class.java)
+//                startActivity(intent)
+//                activity?.finish()
+//            }
+//        }.addOnFailureListener { exception ->
+//            Toast.makeText(binding.root.context ,exception.localizedMessage, Toast.LENGTH_LONG).show()
+//        }
+//    }
 
 }
