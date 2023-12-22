@@ -14,7 +14,7 @@ interface ApiService {
     ): HistoryResponse
 
     @FormUrlEncoded
-    @POST("register")
+    @POST("predict")
     suspend fun postPredict(
         @Field("idToken") idToken: String,
         @Field("n") n: Float,
