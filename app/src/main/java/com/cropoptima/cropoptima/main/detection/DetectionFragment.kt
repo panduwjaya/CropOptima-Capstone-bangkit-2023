@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.cropoptima.cropoptima.R
+import com.cropoptima.cropoptima.data.network.response.Message
 import com.cropoptima.cropoptima.databinding.FragmentDetectionBinding
 import com.cropoptima.cropoptima.main.MainActivity
 import com.cropoptima.cropoptima.main.maps.MapsActivity
@@ -25,6 +26,8 @@ import com.cropoptima.cropoptima.main.setting.SettingsViewModelFactory
 import com.cropoptima.cropoptima.utils.MainViewModelFactory
 import com.cropoptima.cropoptima.utils.Result
 import com.cropoptima.cropoptima.utils.Utils
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 
 class DetectionFragment : Fragment() {
 
@@ -64,8 +67,6 @@ class DetectionFragment : Fragment() {
         settingsViewModel = ViewModelProvider(requireActivity(), SettingsViewModelFactory(SettingsPreference.getInstance(requireContext().dataStore))).get(
                 SettingsViewModel::class.java)
 
-        val idToken = Utils.getCurrentUserIdToken()
-
         binding.tvNameLocation.setOnClickListener {
             val intent= Intent(binding.root.context, MapsActivity::class.java)
             startActivity(intent)
@@ -79,6 +80,7 @@ class DetectionFragment : Fragment() {
             val inputPhTanah = binding.inputPhTanah.text.toString().toFloat()
             var inputLat: Float = 0F
             var inputLon: Float = 0F
+            val user = Firebase.auth.currentUser
 
             settingsViewModel.getlat().observe(viewLifecycleOwner){
                 inputLat = it.toFloat()
@@ -87,34 +89,42 @@ class DetectionFragment : Fragment() {
             settingsViewModel.getlon().observe(viewLifecycleOwner){
                 inputLat = it.toFloat()
             }
-            detectionViewModel.postPredict(
-                idToken,
-                inputNitrogen,
-                inputProtein,
-                inputKalium,
-                inputPhTanah,
-                inputLat,
-                inputLon
-            ).observe(viewLifecycleOwner) {result->
-                when (result) {
-                    is Result.Loading -> {
+            user?.getIdToken(true)?.addOnCompleteListener { task->
+                detectionViewModel.postPredict(
+                    task.result.token!!,
+                    inputNitrogen,
+                    inputProtein,
+                    inputKalium,
+                    inputPhTanah,
+                    inputLat,
+                    inputLon
+                ).observe(viewLifecycleOwner) {result->
+                    when (result) {
+                        is Result.Loading -> {
 
-                    }
-                    is Result.Success -> {
-                        val mBundle = Bundle()
-                        mBundle.putString(EXTRA_IMG,result.data.message?.imageURL)
-                        mBundle.putString(EXTRA_DESCRIPTION,result.data.message?.description)
-                        mBundle.putString(EXTRA_LOCATION,result.data.message?.location)
-                        mBundle.putString(EXTRA_CROP,result.data.message?.crop)
-                        Toast.makeText(context, "Detection is success", Toast.LENGTH_LONG).show()
-                        view?.findNavController()?.navigate(R.id.action_detection_to_resultFragment,mBundle)
-                    }
+                        }
+                        is Result.Success -> {
+                            val data = result.data.message!!
+                            val mBundle = Bundle()
+                            val message = Message(
+                                data.imageURL,
+                                data.description,
+                                data.location,
+                                data.crop
+                            )
+                            mBundle.putParcelable(EXTRA_CROP, message)
+                            Toast.makeText(context, "Detection is success", Toast.LENGTH_LONG).show()
+                            view?.findNavController()?.navigate(R.id.action_detection_to_resultFragment,mBundle)
+                        }
 
-                    is Result.Error -> {
-                        Toast.makeText(context, result.error, Toast.LENGTH_LONG).show()
+                        is Result.Error -> {
+                            Toast.makeText(context, result.error, Toast.LENGTH_LONG).show()
+                        }
                     }
                 }
             }
+
+
         }
     }
 }
